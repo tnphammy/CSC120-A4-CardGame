@@ -109,6 +109,33 @@ public class CardPile extends LinkedList<Card> {
     }
 
     /**
+     * Find an iterator just before the mark
+     *
+     * @param mark New card goes before this one
+     */
+    public ListIterator<Card> iteratorBefore(Card mark) {
+        ListIterator<Card> position = listIterator(size());
+        while (position.hasPrevious() && (position.previous() != mark)) {
+            // keep going until we find our card
+        }
+        return position;
+    }
+
+    /**
+     * Find an iterator just after the mark
+     *
+     * @param mark New card goes before this one
+     */
+    public ListIterator<Card> iteratorAfter(Card mark) {
+        // PLS CHANGE
+        ListIterator<Card> position = listIterator(size());
+        while (position.hasPrevious() && (position.previous() != mark)) {
+            // keep going until we find our card
+        }
+        return position;
+    }
+
+    /**
      * Moves every element after the mark into a new pile.
      * If mark is null, entire pile is moved.
      * The location of the new pile will be (0,0).
