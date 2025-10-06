@@ -64,7 +64,7 @@ The goal of phase one is to add commands that let the program interact with the 
 
 ### Practice with Iterators
 
-To begin, find the place in the `CardPile` constructor that says "// Add code here to turn over all the cards".
+To begin, find the place in the `CardGame` constructor that says "// Add code here to turn over all the cards".
 To do this, you will write a loop to flip over each card in the first pile (p[0]) using an iterator.
 Because CardPile extends Java's LinkedList class, it is a doubly-linked list that provides an iterator.
 To get an iterator that will let you loop through the elements in cardPile, you can use the syntax:

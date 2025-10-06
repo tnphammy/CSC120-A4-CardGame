@@ -4,7 +4,7 @@ Your readme should include the following information. **Each student** needs to 
 
 ## Submission Details
 
-Your Name:
+Your Name: Tammy Pham
 
 
 Programming Partner Name (if you are submitting identical code):
