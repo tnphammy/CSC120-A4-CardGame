@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.List;
 import java.util.*;
 
 /**
@@ -77,7 +78,14 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes after this one
      */
     public void insertAfter(Card card, Card mark) {
-        // FILL IN
+        // Create the Iterator position at the front
+        ListIterator<Card> position = listIterator();
+        // Loop to find the right position
+        while (position.hasNext() && position.next() != mark) {
+        }
+
+        // Insert the card accordingly
+        position.add(card);
     }
 
     /**
@@ -105,7 +113,16 @@ public class CardPile extends LinkedList<Card> {
      * @param mark   insert after this point
      */
     public void insertAfter(CardPile insert, Card mark) {
-        // FILL IN
+        // Create the Iterator position at the front
+        ListIterator<Card> position = listIterator();
+        // Loop to find the right position
+        while (position.hasNext() && position.next() != mark) {
+        }
+
+        // Insert the every element of the other list accordingly
+        while(insert.size() > 0) {
+            position.add(insert.removeFirst());
+        }
     }
 
     /**
