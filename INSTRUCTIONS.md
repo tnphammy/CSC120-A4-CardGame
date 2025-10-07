@@ -2,9 +2,9 @@
 
 For this assignment, you will build a GUI-based program that will use a `LinkedList` as its underlying data type.
 The program itself will allow the user to move piles of cards around in a window, much like in a solitaire game.
-This program is a visual application of linked lists: every *pile* is a *linked list* of cards, and dragging one pile into another transfers the cards between the piles.
+This program is a visual application of linked lists: every _pile_ is a _linked list_ of cards, and dragging one pile into another transfers the cards between the piles.
 
-Because we are working with linked lists, for this assignment you should ***avoid any methods that require or use an index***.
+Because we are working with linked lists, for this assignment you should **_avoid any methods that require or use an index_**.
 Anything that an index could be used for can be accomplished using an iterator instead.
 
 ## Getting Started
@@ -17,27 +17,26 @@ Before you start, you will want to familiarize yourself with the provided classe
 You will be extending these classes to make a card game.
 
 The classes are:
-* The first class is `Card`, which represents a single playing card.
-It has nested classes `Card.Rank` and `Card.Suit`.
-It stores (and can display) images of the front and back side of the card and contains a boolean field to indicate which side is up.
-**You do not need to edit this file.**
 
+- The first class is `Card`, which represents a single playing card.
+  It has nested classes `Card.Rank` and `Card.Suit`.
+  It stores (and can display) images of the front and back side of the card and contains a boolean field to indicate which side is up.
+  **You do not need to edit this file.**
 
-* `CardPile` extends `LinkedList<Card>`, representing an ordered pile of cards.
-Because the `CardPile` extends `LinkedList`, we expect this class to exhibit basic linked list behavior.
-However, it also includes additional display-related fields to specify where the pile is located and how the cards are spread out.
-There are four places marked with a comment that says `// FILL IN`, indicating where you will be asked to implement list-processing methods.
+- `CardPile` extends `LinkedList<Card>`, representing an ordered pile of cards.
+  Because the `CardPile` extends `LinkedList`, we expect this class to exhibit basic linked list behavior.
+  However, it also includes additional display-related fields to specify where the pile is located and how the cards are spread out.
+  There are four places marked with a comment that says `// FILL IN`, indicating where you will be asked to implement list-processing methods.
 
-
-* `CardGame` is the engine that integrates our data structures with the graphical output to produce the GUI.
-The class implements a visible component in a window and manages how the user interface behaves.
-Large chunks of code are provided; this code will handle the graphics display.
-Your role is to fill in appropriate list operations wherever there is a comment saying `// FILL IN`.
-In each of these places, you will find a comment explaining the purpose of the code you're asked to write.
+- `CardGame` is the engine that integrates our data structures with the graphical output to produce the GUI.
+  The class implements a visible component in a window and manages how the user interface behaves.
+  Large chunks of code are provided; this code will handle the graphics display.
+  Your role is to fill in appropriate list operations wherever there is a comment saying `// FILL IN`.
+  In each of these places, you will find a comment explaining the purpose of the code you're asked to write.
 
 ### First Step
 
-Compile and run the program as distributed to check that it is working properly. 
+Compile and run the program as distributed to check that it is working properly.
 To work properly, the program must be able to load the card images from the web.
 (Credit for the images goes to J. Fitz.)
 
@@ -60,7 +59,7 @@ You will be able to add the functionalities below using linked lists operations 
 ## Stage One
 
 Currently, `CardGame` creates a single row of face-down cards at the top of the window.
-The goal of phase one is to add commands that let the program interact with the cards, moving them between piles and making other changes.  For this stage, the changes will not be under control of the mouse.  Instead they will be written directly into the program.  Remember that you should ***not call any methods that require an index***.
+The goal of phase one is to add commands that let the program interact with the cards, moving them between piles and making other changes. For this stage, the changes will not be under control of the mouse. Instead they will be written directly into the program. Remember that you should **_not call any methods that require an index_**.
 
 ### Practice with Iterators
 
@@ -68,11 +67,11 @@ To begin, find the place in the `CardGame` constructor that says "// Add code he
 To do this, you will write a loop to flip over each card in the first pile (p[0]) using an iterator.
 Because CardPile extends Java's LinkedList class, it is a doubly-linked list that provides an iterator.
 To get an iterator that will let you loop through the elements in cardPile, you can use the syntax:
-    `ListIterator<Card> position = listIterator();`
+`ListIterator<Card> position = listIterator();`
 This will create an iterator over the `CardPile` that starts before the first card in the `CardPile`.
 From there, you can use `hasNext()` and `next()` to traverse the pile/list.
 Similarly, if you want to start at the end of the list, you can use:
-    `ListIterator<Card> position = listIterator(size());`
+`ListIterator<Card> position = listIterator(size());`
 This will create an iterator positioned after the last card.
 From here, you can use `hasPrevious()` and `previous()` to traverse the pile from the end towards the front.
 
@@ -90,21 +89,22 @@ Here we will work with `CardPile` (our `LinkedList` subclass).
 These list operation methods will allow you to split or merge lists at specified points.
 The call signatures and Javadoc descriptions of the methods are already given in the file, near the `// FILL IN` comment.
 
-`CardPile` class: 
-* First, you'll want to add methods for `insertAfter`.
+`CardPile` class:
+
+- First, you'll want to add methods for `insertAfter`.
   This class should be overloaded to allow you to insert either a single card or a list.
   We have provided an example of an implementation for similar methods in `insertBefore` and `iteratorBefore`.
   You are encouraged to model your implementation off of these examples.
-* Next, create a method called `iteratorAfter`.
+- Next, create a method called `iteratorAfter`.
   This method is fairly similar to `insertAfter`, but instead of returning a card, you return an iterator position.
   Look at `iteratorBefore` as an example to help you craft your implementation.
-* Finally, you should write a method called `split`.
+- Finally, you should write a method called `split`.
   Split asks you to separate a `CardPile` into two pieces.
   For this one, you might want to use the `CardPile` constructor that takes coordinates (int x and int y) as arguments and just provide arbitrary coordinates (e.g., 0, 0).
 
 Try to implement these methods in the most efficient way you know -- but don't get confused trying to do something too fancy.
 You won't necessarily need to use iterators for every operation -- in some places, a while loop using methods like `removeLast()` and `addLast()` will do fine and probably be simpler to write.
-You may also want to use the `addAll` method in its non-indexed version only. 
+You may also want to use the `addAll` method in its non-indexed version only.
 
 ### Testing
 
@@ -124,40 +124,36 @@ Calling a non-static method on a pile that is null will always generate a `NullP
 Now you are ready to add user interaction!
 Try to implement the following behaviors in `CardGame`:
 
-* **mouseClicked**: When the user double-clicks on a card, that card and all those following it in the pile should be flipped over.
+- **mouseClicked**: When the user double-clicks on a card, that card and all those following it in the pile should be flipped over.
   Cards before it in the same pile should not be flipped.
   To do this, on a double click, traverse the list of cards in the current pile starting from the card under the mouse, and flip them over using `Card.flipCard()`.
   To distinguish a double click from a single (or triple, etc.) click, you can consult the `getClickCount()` method of the `MouseEvent`.
   Try to build your `mouseClicked` implementation using iterators.
 
-
-*  **mousePressed**: When the mouse is pressed, you want to record both the pile nearest to the click location and the card under the click location (if any).
+- **mousePressed**: When the mouse is pressed, you want to record both the pile nearest to the click location and the card under the click location (if any).
   Store them in `pileUnderMouse` and `cardUnderMouse`, respectively.
   These locations will be needed if the user is trying to drag cards (see below).
-  
 
-* **movingPile**: When the user clicks on a card and begins to drag, that card and all those following it in the pile should be removed from the pile they are in.
-    These cards will be used to create a new pile called `movingPile` that will follow the mouse around.
-    (See `mouseDragged` for how to get the cards to follow the mouse).
+- **movingPile**: When the user clicks on a card and begins to drag, that card and all those following it in the pile should be removed from the pile they are in.
+  These cards will be used to create a new pile called `movingPile` that will follow the mouse around.
+  (See `mouseDragged` for how to get the cards to follow the mouse).
 
+- **mouseDragged**: This handler must look at `movingPile` to decide between two courses of action.
+  Normally all it needs to do is update the coordinates of `movingPile` to match the current mouse location.
+  However, if `movingPile` is null, then this indicates that the user is beginning a new drag sequence.
+  In this case you have to separate the pile of cards that are being dragged from the fixed pile where they started.
+  All the cards in `pileUnderMouse` from `cardUnderMouse` onwards to the end should be split off and put in `movingPile`.
+  (If `cardUnderMouse` is null then the entire contents of `pileUnderMouse` should be transferred.)
+  Once the piles are split, you can then update the `movingPile` coordinates to match the mouse's location, as usual.
 
-*  **mouseDragged**: This handler must look at `movingPile` to decide between two courses of action.
-    Normally all it needs to do is update the coordinates of `movingPile` to match the current mouse location.
-    However, if `movingPile` is null, then this indicates that the user is beginning a new drag sequence.
-    In this case you have to separate the pile of cards that are being dragged from the fixed pile where they started.
-    All the cards in `pileUnderMouse` from `cardUnderMouse` onwards to the end should be split off and put in `movingPile`.
-    (If `cardUnderMouse` is null then the entire contents of `pileUnderMouse` should be transferred.)
-    Once the piles are split, you can then update the `movingPile` coordinates to match the mouse's location, as usual.
+- **mouseReleased**: If `movingPile` is non-null, then we are ending a drag sequence.
+  The moving pile must be inserted just after the card at the location where the mouse was released, or appended at the end of the appropriate pile if the mouse is not released over any specific card.
+  Also, `movingPile` should then be reset to null, since releasing the mouse ends the drag sequence.
+  When the user releases the mouse while dragging a pile of cards, the pile should be inserted into a different pile based on where the mouse was released:
+  - If the mouse is released on top of a card, the moving pile should be inserted into the pile right after that card.
+  - Otherwise, it should be appended to the end of the nearest pile. (Note that there is a method called `locatePile` you can use to determine the closest pile.)
 
-
-*  **mouseReleased**: If `movingPile` is non-null, then we are ending a drag sequence.
-    The moving pile must be inserted just after the card at the location where the mouse was released, or appended at the end of the appropriate pile if the mouse is not released over any specific card.
-    Also, `movingPile` should then be reset to null, since releasing the mouse ends the drag sequence.
-    When the user releases the mouse while dragging a pile of cards, the pile should be inserted into a different pile based on where the mouse was released:
-    * If the mouse is released on top of a card, the moving pile should be inserted into the pile right after that card. 
-    * Otherwise, it should be appended to the end of the nearest pile.  (Note that there is a method called `locatePile` you can use to determine the closest pile.) 
-
-To implement the desired behavior, you will need to fill in the appropriate  event handlers, as noted below and in the code.
+To implement the desired behavior, you will need to fill in the appropriate event handlers, as noted below and in the code.
 Also note that `cardUnderMouse`, `pileUnderMouse`, and `movingPile` are fields of `CardGame` and will therefore be accessible to its nested classes.
 
 ## Debugging
@@ -180,7 +176,7 @@ As a reminder, don't panic when your program generates an uncaught exception.
 This most often results from trying to do something with a variable that has not been properly initialized.
 For example, consider the following exception:
 
-`   Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+`  Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
          at CardPile.split(CardPile.java:159)
          at CardTable$Responder.mouseDragged(CardTable.java:167)
          at java.awt.Component.processMouseMotionEvent(Component.java:5536)
@@ -202,11 +198,11 @@ For example, consider the following exception:
          at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:157)
          at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:149)
          at java.awt.EventDispatchThread.run(EventDispatchThread.java:110)
-   `
+  `
 
 All this error text can look daunting at first glance, but in fact all the information you need to know is contained in the first two lines:
 
-   `Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+`Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
          at CardPile.split(CardPile.java:159)`
 
 This output tells us what went wrong (we must have tried to do something with an object whose value was null) and the exact line in the program that caused the error.
@@ -216,25 +212,27 @@ If we are not so lucky, it may be necessary to investigate further.
 Perhaps the object is not supposed to have a null value -- then we need to do some detective work to figure out how it got a value we didn't expect.
 Back up through all the parts of your program that handle the object, printing out information about its status until you figure out where things went wrong.
 
-The scariest-looking situation is when you have an exception triggered in the `mouseDragged` handler: it will generate exceptions over and over repeatedly as you move the mouse.  Don't panic!  Close the program, scroll back to see what error message begins the sequence, and work on fixing it.
+The scariest-looking situation is when you have an exception triggered in the `mouseDragged` handler: it will generate exceptions over and over repeatedly as you move the mouse. Don't panic! Close the program, scroll back to see what error message begins the sequence, and work on fixing it.
 
 Note that an event handler that generates an uncaught exception will not finish executing any statements past the point where the exception was triggered.
 This may leave your data structures in an inconsistent state and generate further problems down the line.
 Try to respond to any exceptions as soon as you see them.
 
 ## To Submit
+
 Submit your complete stage 2 files on Moodle (section 1) or Gradescope (section 2).
 You should upload:
-* All .java files needed for your program to compile
-* Screenshot of your program in action, called cards.png
-* readme.md with your reflections
+
+- All .java files needed for your program to compile
+- Screenshot of your program in action, called cards.png
+- readme.md with your reflections
 
 ## Quick Start
 
-* Begin by reading through the Javadoc provided so that you have an idea of what the classes are supposed to do.
-* Work through the Stage 1 goals, adding test code to the `CardGame` constructor first.
-* Work through the Stage 2 goals, adding code to the nested listener classes within `CardTable`. Write the double-click handler first, then the rest.
-* Test your program thoroughly. Try things you wouldn't expect the user to normally do, like dragging on an empty pile or dragging off the screen. Make sure there are no exceptions generated.
+- Begin by reading through the Javadoc provided so that you have an idea of what the classes are supposed to do.
+- Work through the Stage 1 goals, adding test code to the `CardGame` constructor first.
+- Work through the Stage 2 goals, adding code to the nested listener classes within `CardTable`. Write the double-click handler first, then the rest.
+- Test your program thoroughly. Try things you wouldn't expect the user to normally do, like dragging on an empty pile or dragging off the screen. Make sure there are no exceptions generated.
 
 ## Kudos
 

@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.List;
 import java.util.*;
 
 /**
@@ -129,6 +128,7 @@ public class CardPile extends LinkedList<Card> {
      * Find an iterator just before the mark
      *
      * @param mark New card goes before this one
+     * @return The position of the iterator before the mark
      */
     public ListIterator<Card> iteratorBefore(Card mark) {
         ListIterator<Card> position = listIterator(size());
@@ -144,9 +144,10 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes before this one
      */
     public ListIterator<Card> iteratorAfter(Card mark) {
-        // PLS CHANGE
+        // Make an Iterator position at the front
         ListIterator<Card> position = listIterator(size());
-        while (position.hasPrevious() && (position.previous() != mark)) {
+        // Loop to find correct position
+        while (position.hasNext() && (position.next() != mark)) {
             // keep going until we find our card
         }
         return position;
@@ -161,8 +162,27 @@ public class CardPile extends LinkedList<Card> {
      * @return the suffix pile
      */
     public CardPile split(Card mark) {
-        // FILL IN -- return value below is temporary, for clean compile
-        return null;
+        // Initialize arbitrary pile
+        CardPile suffixPile = new CardPile(50, 102);
+        // Mark is null 
+        if (mark == null) {
+            // set suffixPile's x and y to 0
+            suffixPile.setX(0);
+            suffixPile.setY(0);
+            // Move all elements of current deck to suffixPile
+            while(this.size() > 0) {
+                suffixPile.addLast(this.removeFirst());
+            }
+        }
+        else {
+            // Get the Iterator position before the mark
+            ListIterator<Card> position = this.iteratorBefore(mark);
+            // Loop from the position found above and add each element to suffixPile
+            while(position.hasNext()) {
+                suffixPile.addLast(this.removeFirst());
+            }
+        }
+        return suffixPile;
     }
 
     /**
