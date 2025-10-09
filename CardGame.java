@@ -84,10 +84,29 @@ public class CardGame extends JComponent {
 
         // Now add your card movements for stage 1 here.
         // FILL IN
+        // 1. Testing insertAfter()
+        // For singular card
+        // pile[0].insertAfter(pile[1].removeLast(), temp);
+        // pile[0].insertAfter(pile[1].removeLast(), temp);
+        // For a pile of cards
+        // pile[0].insertAfter(pile[1].removeLast(), null);
+
+        // 2. Testing iteratorAfter()
+        // non-null
+        // ListIterator<Card> pos = pile[0].listIterator();
+        // Card tempFirst = pos.next();
+        // tempFirst.flipCard();
+        // ListIterator<Card> it = pile[0].iteratorAfter(tempFirst);
+        // Card nowFlip = it.next();
+        // nowFlip.flipCard();
+        // null
+        // ListIterator<Card> it = pile[0].iteratorAfter(null);
+        // it.add(pile[1].removeLast());
 
         // Once you have written the split() method in CardPile
         // you can uncomment and test the line below.
-        pile[2].addAll(pile[0].split(pile[0].get(26)));
+        // pile[2].addAll(pile[0].split(pile[0].get(26)));
+        // pile[2].addAll(pile[0].split(null)); // test null - moves entire pile
 
         // Next try other uses of split.
         // Then try out the various insert methods.

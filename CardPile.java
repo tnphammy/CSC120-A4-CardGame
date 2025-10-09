@@ -77,12 +77,18 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes after this one
      */
     public void insertAfter(Card card, Card mark) {
+        if (card == null) {
+            return;
+        }
         // Create the Iterator position at the front
         ListIterator<Card> position = listIterator();
-        // Loop to find the right position
-        while (position.hasNext() && position.next() != mark) {
-        }
 
+        // Check if trying to insert at the front => Skip
+        if (mark != null){
+            // Loop to find the right position
+            while (position.hasNext() && position.next() != mark) {
+            }
+        }
         // Insert the card accordingly
         position.add(card);
     }
@@ -112,12 +118,17 @@ public class CardPile extends LinkedList<Card> {
      * @param mark   insert after this point
      */
     public void insertAfter(CardPile insert, Card mark) {
+        if (insert == null) {
+            throw new NoSuchElementException();
+        }
         // Create the Iterator position at the front
         ListIterator<Card> position = listIterator();
-        // Loop to find the right position
-        while (position.hasNext() && position.next() != mark) {
+        // Check to see if (not) trying to insert at the front 
+        if (mark != null) {
+            // Loop to find the right position
+            while (position.hasNext() && position.next() != mark) {
+            }
         }
-
         // Insert the every element of the other list accordingly
         while(insert.size() > 0) {
             position.add(insert.removeFirst());
@@ -145,10 +156,13 @@ public class CardPile extends LinkedList<Card> {
      */
     public ListIterator<Card> iteratorAfter(Card mark) {
         // Make an Iterator position at the front
-        ListIterator<Card> position = listIterator(size());
-        // Loop to find correct position
-        while (position.hasNext() && (position.next() != mark)) {
-            // keep going until we find our card
+        ListIterator<Card> position = listIterator();
+        // Check if trying to find iterator after the first element
+        if(mark != null) {
+            // Loop to find correct position
+            while (position.hasNext() && (position.next() != mark)) {
+                // keep going until we find our card
+            }
         }
         return position;
     }
