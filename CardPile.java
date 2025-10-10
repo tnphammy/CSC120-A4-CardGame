@@ -191,9 +191,10 @@ public class CardPile extends LinkedList<Card> {
         else {
             // Get the Iterator position before the mark
             ListIterator<Card> position = this.iteratorBefore(mark);
-            // Loop from the position found above and add each element to suffixPile
+            // Loop from the position found above to fill suffixPile
             while(position.hasNext()) {
-                suffixPile.addLast(this.removeFirst());
+                suffixPile.addFirst(this.removeLast());
+
             }
         }
         return suffixPile;

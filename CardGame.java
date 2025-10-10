@@ -54,7 +54,7 @@ public class CardGame extends JComponent {
     /** Initialize a table with a deck of cards in the first slot */
     public CardGame() {
         pile[0] = new CardPile(Card.newDeck(), 2, 2);
-        pile[1] = new CardPile(2, 102);
+        pile[1] = new CardPile(Card.newDeck(), 2, 102);
         pile[2] = new CardPile(2, 202);
         pile[3] = new CardPile(2, 302);
         pile[4] = new CardPile(2, 402);
@@ -241,9 +241,17 @@ public class CardGame extends JComponent {
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
                 System.out.println("Mouse double click event at (" + e.getX() + "," + e.getY() + ").");
-                // FILL IN
-                // What happens here when a pile is double clicked?
-
+                // Flips the clicked card and all following cards (in its pile)
+                // 1. Locate the clicked card and its pile
+                Card clickedCard = locateCard(e.getX(), e.getY());
+                CardPile clickedPile = locatePile(e.getX(), e.getY());
+                // 2. Get clicked card's iterator position
+                ListIterator<Card> clickPosition = clickedPile.iteratorBefore(clickedCard);
+                // 3. Start flipping cards in a loop using iterator
+                while (clickPosition.hasNext()) {
+                    Card currentCard = clickPosition.next(); // Updates current card and iterator position
+                    currentCard.flipCard(); // Flips current card
+                }
                 repaint();
             }
         }
@@ -253,8 +261,9 @@ public class CardGame extends JComponent {
          * but doesn't move any data until we have a drag event
          */
         public void mousePressed(MouseEvent e) {
-            // FILL IN
-            // What happens here when the mouse is pressed?
+            // Stores clicked card and its pile
+            cardUnderMouse = locateCard(e.getX(), e.getY());
+            pileUnderMouse = locatePile(e.getX(), e.getY());
         }
 
         /** Release event handler */
@@ -262,7 +271,22 @@ public class CardGame extends JComponent {
             if (movingPile != null) {
                 // FILL IN
                 // We have a pile coming to rest -- where? what happens?
+                // WHERE: End of current pile
+                // Locate current pile
+                pileUnderMouse = locatePile(e.getX(), e.getY());
+                // WHAT HAPPENS: Moving pile appends to the end of ^
+                // 1. Get end of pile
+                // Use iterator to get to the end of pile
+                ListIterator<Card> position = pileUnderMouse.listIterator();
+                Card temp = null;
+                while (position.hasNext()) {
+                // Updates the Iterator
+                temp = position.next();
+                }
+                // 2. Append to the end of pile
+                pileUnderMouse.insertAfter(movingPile, temp);
 
+                movingPile = null;
             }
             repaint();
         }
@@ -279,7 +303,25 @@ public class CardGame extends JComponent {
         public void mouseDragged(MouseEvent e) {
             // FILL IN
             // What happens when the mouse is dragged?
-            // What if it is the first drag after a mouse down?
+            mousePressed(e); // Updates/Stores mouse and pile
+            // If movingPile is null => New Drag
+            if (movingPile == null) {
+                if (cardUnderMouse == null) {
+                    // Dragging the whole pile
+                    if (pileUnderMouse != null) {
+                        movingPile = pileUnderMouse;
+                    } else {
+                        return; // there is nothing to be done
+                    }
+                } else {
+                    // Split part of pile
+                    movingPile = pileUnderMouse.split(cardUnderMouse);
+                }
+            }
+            // Move movingPile
+            // Update's movingPile's location to follow mouse
+            movingPile.setX(e.getX());
+            movingPile.setY(e.getY());
         }
 
         /** Move event handler */
